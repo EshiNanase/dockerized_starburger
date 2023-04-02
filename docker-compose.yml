@@ -18,8 +18,7 @@ services:
   web:
     build: .
     command: >
-      sh -c "python manage.py wait_for_db &&
-             python manage.py collectstatic --noinput &&
+      sh -c "python manage.py collectstatic --noinput &&
              python manage.py migrate &&
              gunicorn star_burger.wsgi:application --bind 0.0.0.0:8000"
     volumes:
@@ -37,7 +36,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
-      - .env_db
+      - .env
     ports:
       - 5432:5432
 

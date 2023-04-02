@@ -88,7 +88,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 
 DATABASES = {
-    'default': env.dj_db_url('POSTGRES_DATABASE_URL')
+    'default': {
+        'ENGINE': "django.db.backends.postgresql",
+        'HOST': 'db',
+        'NAME': env.str("POSTGRES_DB"),
+        'USER': env.str("POSTGRES_USER"),
+        'PASSWORD': env.str("POSTGRES_PASSWORD"),
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
