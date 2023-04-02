@@ -146,3 +146,4 @@ frontend/.parcel-cache/
 starburger_deploy
 static/
 staticfiles/
+.env_db
