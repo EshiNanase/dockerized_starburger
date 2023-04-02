@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        - DEV=true
+    volumes:
+      - static:/app/static
+      - media:/app/media
+    expose:
+      - 80
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             gunicorn star_burger.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static:/app/static
+      - media:/app/media
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - .env_db
+
+volumes:
+  media:
+  static:
+  postgres:
