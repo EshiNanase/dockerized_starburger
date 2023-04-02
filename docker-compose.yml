@@ -7,8 +7,6 @@ services:
       context: ./nginx
       args:
         - DEV=true
-    networks:
-      - backend
     volumes:
       - static:/app/static
       - media:/app/media
@@ -20,11 +18,10 @@ services:
   web:
     build: .
     command: >
-      sh -c "python manage.py collectstatic --noinput &&
+      sh -c "python manage.py wait_for_db &&
+             python manage.py collectstatic --noinput &&
              python manage.py migrate &&
              gunicorn star_burger.wsgi:application --bind 0.0.0.0:8000"
-    networks:
-      - backend
     volumes:
       - static:/app/static
       - media:/app/media
@@ -37,8 +34,6 @@ services:
 
   db:
     image: postgres:14
-    networks:
-      - backend
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
@@ -50,7 +45,3 @@ volumes:
   media:
   static:
   postgres:
-
-networks:
-  backend:
-     driver: bridge
