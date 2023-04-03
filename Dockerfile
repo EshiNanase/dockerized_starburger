@@ -17,6 +17,7 @@ WORKDIR /app
 
 COPY backend/. /app
 COPY requirements.txt /tmp/requirements.txt
+COPY wait-for-it.sh /app
 
 RUN python -m venv . && \
     pip install -r /tmp/requirements.txt && \
