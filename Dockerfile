@@ -21,6 +21,7 @@ COPY wait-for-it.sh /app
 
 RUN python -m venv . && \
     pip install -r /tmp/requirements.txt && \
-    rm -rf /tmp
+    rm -rf /tmp && \
+    chmod +x wait-for-it.sh
 
 COPY --from=static /app/frontend /app
