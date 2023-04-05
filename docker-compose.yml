@@ -3,10 +3,14 @@ version: "3.9"
 services:
 
   nginx:
-    build: ./nginx
+    build:
+      context: ./nginx
+      args:
+        - DEV=true
     volumes:
       - media:/app/media
       - static:/app/static
+
     ports:
       - 8000:80
     depends_on:
