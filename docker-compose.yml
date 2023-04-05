@@ -6,10 +6,13 @@ services:
     image: nginx:1.21
     volumes:
       - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
       - media:/app/media
       - static:/app/static
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - web
     restart: always
@@ -41,6 +44,15 @@ services:
     ports:
       - 5432
     restart: always
+
+  certbot:
+    image: certbot/certbot:latest
+    depends_on:
+      - nginx
+    container_name: certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
 volumes:
   media:
