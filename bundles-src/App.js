@@ -288,7 +288,7 @@ class App extends Component {
           <BannerComponent banners={this.state.banners}/>
         }
 
-        <a id="menu" href="frontend/bundles-src/App#"></a>
+        <a id="menu" href="#"></a>
 
         <div className="container-fluid">
           <div className="row" style={{marginBottom:"50px"}}>
@@ -337,7 +337,7 @@ class App extends Component {
 
         </div>
 
-        <a href="frontend/bundles-src/App#" id="contact_us"></a>
+        <a href="#" id="contact_us"></a>
         <FooterComponent/>
 
         <CheckoutModal

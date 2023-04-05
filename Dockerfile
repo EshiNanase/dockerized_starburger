@@ -1,11 +1,11 @@
 FROM node:16.16.0 as static
 LABEL maintainer='eshinanase'
 
-WORKDIR /app/frontend
+WORKDIR /app
 
-COPY frontend/assets /app/frontend/assets
-COPY frontend/bundles-src /app/frontend/bundles-src
-COPY frontend/package.json /app/frontend/
+COPY assets /app/assets
+COPY bundles-src /app/bundles-src
+COPY package.json /app
 
 RUN npm i && \
     ./node_modules/.bin/parcel build bundles-src/index.js --dist-dir bundles --public-url="./"
@@ -24,4 +24,4 @@ RUN python -m venv . && \
     rm -rf /tmp && \
     chmod +x wait-for-it.sh
 
-COPY --from=static /app/frontend /app
+COPY --from=static /app /app
