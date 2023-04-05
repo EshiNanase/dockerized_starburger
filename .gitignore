@@ -147,4 +147,3 @@ starburger_deploy
 static/
 staticfiles/
 .env_db
-nginx.conf
