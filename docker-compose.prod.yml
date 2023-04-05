@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+
+  nginx:
+    volumes:
+      - ./data/nginx/prod:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt
+      - media:/app/media
+      - static:/app/static
+    ports:
+      - 80:80
+      - 443:443
