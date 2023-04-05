@@ -9,7 +9,7 @@ services:
         - DEV=false
     volumes:
       - media:/app/media
-      - static:/app/static  
+      - static:/app/static
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
 
