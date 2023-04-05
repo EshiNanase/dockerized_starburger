@@ -148,3 +148,4 @@ static/
 staticfiles/
 .env_db
 data.json
+nginx.conf
