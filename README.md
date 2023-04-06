@@ -53,7 +53,7 @@ http://127.0.0.1:8000/
 ```sh
 server {
     listen 80;
-    server_name {ВАШ ДОМЕН};
+    server_name _;
     server_tokens off;
 
     location / {
@@ -63,11 +63,11 @@ server {
 
 server {
     listen 443 ssl;
-    server_name {ВАШ ДОМЕН};
+    server_name _;
     server_tokens off;
 
-    ssl_certificate /etc/letsencrypt/live/{ВАШ ДОМЕН}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{ВАШ ДОМЕН}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/_/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/_/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
@@ -87,6 +87,7 @@ server {
     }
 }
 ```
+На месте "_" должен быть ваш домен, например, rofloburger.fun
 
 ### Получить SSL Сертификат от Certbot'а на сервер
 ```sh
@@ -98,6 +99,6 @@ https://certbot.eff.org/
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --remove-orphans
 ```
 
-### Как быстро задеплоить код на сервере
+## Как быстро задеплоить код на сервере
 - Перейти в директорию /opt/devman/dockerized_starburger
 - Запустить ./starburger_deploy
