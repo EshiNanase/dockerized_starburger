@@ -96,7 +96,7 @@ https://certbot.eff.org/
 
 ### Запустить prod-версию в консоли
 ```sh
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --remove-orphans
+sudo docker-compose -f docker-compose.prod.yml up -d --build --remove-orphans
 ```
 
 ## Как быстро задеплоить код на сервере
