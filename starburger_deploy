@@ -1,0 +1,8 @@
+set -e
+git pull
+
+sudo docker-compose up -d --build --remove-orphans
+
+COMMENT=$(git log -1 --pretty=%B)
+REVISION=$(git rev-parse --verify HEAD)
+curl -H "X-Rollbar-Access-Token: $ROLLBAR_TOKEN" -H "Content-Type: application/json" -X POST 'https://api.rollbar.com/api/1/deploy' -d '{"environment": "production", "revision": "'"$REVISION"'", "rollbar_name": "alksndr.zln", "comment": "'"$COMMENT"'", "status": "succeeded"}'
